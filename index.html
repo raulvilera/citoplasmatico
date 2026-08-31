@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade - Ciências 6º Ano - 3º Bimestre</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            padding: 25px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            color: #1a2a3a;
+            margin: 0;
+        }
+        .header h2 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            font-weight: 400;
+            margin: 4px 0 0;
+        }
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 30px;
+            background: #e9edf2;
+            padding: 15px 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+        .info-row label {
+            font-weight: 600;
+            color: #1f2a36;
+            margin-right: 6px;
+        }
+        .info-row select, .info-row input {
+            padding: 8px 14px;
+            border-radius: 30px;
+            border: 1px solid #bcc9d6;
+            background: white;
+            font-size: 1rem;
+            min-width: 160px;
+        }
+        .info-row .campo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .info-row .campo span {
+            background: white;
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: 1px solid #bcc9d6;
+            min-width: 120px;
+        }
+        .question {
+            background: #f8faff;
+            border-left: 6px solid #2a7de1;
+            padding: 16px 20px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        /* Imagens maiores e clicáveis para ampliação */
+        .question img {
+            max-width: 100%;
+            width: 100%;
+            max-height: 480px;
+            object-fit: contain;
+            margin: 10px 0 12px;
+            border-radius: 12px;
+            border: 1px solid #dde3ed;
+            display: block;
+            cursor: zoom-in;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            background: #f4f7fb;
+        }
+        .question img:hover {
+            transform: scale(1.01);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+        }
+        .img-hint {
+            font-size: 0.8rem;
+            color: #5c7393;
+            margin: -6px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .question p {
+            font-weight: 500;
+            margin: 0 0 10px;
+            font-size: 1.05rem;
+        }
+        .alternativas {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 10px 0 6px;
+        }
+        .alternativas label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f2f6fc;
+            padding: 10px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: 1px solid #d0dceb;
+            box-shadow: 0 4px 0 #b0c4d8, 0 2px 6px rgba(0,0,0,0.1);
+            position: relative;
+            top: 0;
+            font-weight: 500;
+            color: #1f2a36;
+        }
+        .alternativas label:hover {
+            background: #e3ecf9;
+            border-color: #a0bddb;
+        }
+        .alternativas label.selecionada {
+            background: #1a6b3c !important;
+            color: white !important;
+            font-weight: 700 !important;
+            border-color: #0f4a2a !important;
+            box-shadow: 0 1px 0 #0f4a2a, 0 1px 4px rgba(0,0,0,0.2) !important;
+            top: 3px !important;
+        }
+        .alternativas label.selecionada span {
+            color: white !important;
+            font-weight: 700 !important;
+        }
+        .alternativas input[type="radio"] {
+            accent-color: #1a6b3c;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+        .alternativas label.selecionada input[type="radio"] {
+            accent-color: white;
+        }
+        .dissertativa {
+            margin-top: 6px;
+        }
+        .dissertativa textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            border: 1px solid #cbd7e6;
+            font-size: 1rem;
+            background: white;
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        .dissertativa textarea:focus {
+            outline: 2px solid #2a7de1;
+            border-color: transparent;
+        }
+        .btn-enviar {
+            background: #1f5f9e;
+            color: white;
+            border: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 16px 32px;
+            border-radius: 60px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 0 #0f3a62;
+            position: relative;
+            top: 0;
+        }
+        .btn-enviar:hover:not(:disabled) {
+            background: #154a7a;
+            transform: scale(1.01);
+        }
+        .btn-enviar:active:not(:disabled) {
+            transform: scale(0.97);
+            top: 2px;
+            box-shadow: 0 2px 0 #0f3a62;
+        }
+        .btn-enviar:disabled {
+            background: #7f9db3;
+            cursor: not-allowed;
+            box-shadow: 0 4px 0 #5c7393;
+        }
+        .feedback {
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+        .feedback.visible {
+            display: block;
+        }
+        .feedback.sucesso {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .feedback.erro {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .feedback.carregando {
+            background: #cce5ff;
+            color: #004085;
+            border: 1px solid #b8daff;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #4a5b6e;
+            text-align: center;
+            border-top: 1px solid #d0dceb;
+            padding-top: 16px;
+        }
+        .badge-aula {
+            display: inline-block;
+            background: #2a7de1;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-radius: 30px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        /* ===== LIGHTBOX (ampliação de imagem) ===== */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 16, 24, 0.88);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            cursor: zoom-out;
+            animation: fadeIn 0.15s ease;
+        }
+        .lightbox-overlay.visible {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .lightbox-overlay img {
+            max-width: 95vw;
+            max-height: 90vh;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            cursor: default;
+            animation: zoomIn 0.15s ease;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .lightbox-fechar {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            background: rgba(255,255,255,0.12);
+            color: white;
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s ease;
+        }
+        .lightbox-fechar:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 16px; }
+            .info-row { flex-direction: column; align-items: stretch; }
+            .alternativas label { padding: 8px 12px; }
+            .question img { max-height: 320px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app">
+    <div class="header">
+        <h1>E.E. PROFª WANDA MASCAGNI DE SÁ</h1>
+        <h2>Atividade de Ciências – 6º Ano – 3º Bimestre</h2>
+    </div>
+
+    <!-- DADOS DO ALUNO -->
+    <div class="info-row">
+        <div class="campo">
+            <label>Turma:</label>
+            <select id="selectTurma" onchange="carregarNomes()">
+                <option value="">Selecione</option>
+                <option value="6°Ano A">6°Ano A</option>
+                <option value="6°Ano C">6°Ano C</option>
+            </select>
+        </div>
+        <div class="campo">
+            <label>Nome:</label>
+            <select id="selectNome" onchange="carregarDadosAluno()">
+                <option value="">Selecione a turma primeiro</option>
+            </select>
+        </div>
+        <div class="campo">
+            <label>RA:</label>
+            <span id="spanRA">-</span>
+        </div>
+        <div class="campo">
+            <label>Email:</label>
+            <span id="spanEmail">-</span>
+        </div>
+    </div>
+
+    <!-- QUESTÕES (geradas via JS) -->
+    <div id="questoesContainer"></div>
+
+    <button class="btn-enviar" id="btnEnviar" onclick="enviarRespostas()">📤 Enviar respostas</button>
+    <div id="feedback" class="feedback"></div>
+    <div class="footer">As respostas serão registradas na planilha. Questões dissertativas estão indicadas. Clique em qualquer imagem para ampliá-la.</div>
+</div>
+
+<!-- LIGHTBOX (ampliação de imagem) -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="fecharImagem(event)">
+    <button class="lightbox-fechar" onclick="fecharImagem(event)">&times;</button>
+    <img id="lightboxImg" src="" alt="Imagem ampliada">
+</div>
+
+<script>
+    // ================================================================
+    // BASE DE DADOS DOS ALUNOS (E.E. Profª Wanda Mascagni de Sá)
+    // ================================================================
+    const alunosPorTurma = {
+        "6°Ano A": [
+            { nome: 'ALÍCIA DE SOUZA SIQUEIRA', ra: '125482995', dig: '7', email: '00001254829957sp@al.educacao.sp.gov.br' },
+            { nome: 'AMANDA SALDANHA CAVALCANTE', ra: '116498893', dig: '1', email: '00001164988931SP@al.educacao.sp.gov.br' },
+            { nome: 'ANA BÁRBARA SAÚGO DE OLIVEIRA', ra: '122358848', dig: '8', email: '00001223588488sp@al.educacao.sp.gov.br' },
+            { nome: 'DANIEL DA SILVA TAVARES', ra: '121488509', dig: '3', email: '00001214885093sp@al.educacao.sp.gov.br' },
+            { nome: 'ISABELY SHIBASAKI FERREIRA', ra: '116506026', dig: '7', email: '00001165060267sp@al.educacao.sp.gov.br' },
+            { nome: 'JOÃO INÁCIO DO NASCIMENTO RODRIGUES', ra: '121942028', dig: '1', email: '00001219420281SP@al.educacao.sp.gov.br' },
+            { nome: 'JOAO PIERRE DA SILVA', ra: '116526142', dig: 'X', email: '0000116526142XSP@al.educacao.sp.gov.br' },
+            { nome: 'JULLIA VITORIA ALAMBERT GOMES', ra: '121190776', dig: '4', email: '00001211907764sp@al.educacao.sp.gov.br' },
+            { nome: 'KAMRAN RASEKH', ra: '124596353', dig: '3', email: '00001245963533sp@al.educacao.sp.gov.br' },
+            { nome: 'KAYQUE VINICIOS DA SILVA', ra: '116527229', dig: '5', email: '00001165272295SP@al.educacao.sp.gov.br' },
+            { nome: 'LORENA EMMELINE MENDES LEFEVRE', ra: '121621732', dig: '4', email: '00001216217324sp@al.educacao.sp.gov.br' },
+            { nome: 'LUAN HENRIQUE DE ALMEIDA TAVARES', ra: '123690066', dig: '2', email: '00001236900662sp@al.educacao.sp.gov.br' },
+            { nome: 'MURILLO CARVALHO SALES', ra: '121486350', dig: '4', email: '00001214863504sp@al.educacao.sp.gov.br' },
+            { nome: 'NICOLY FERREIRA GONCALVES', ra: '123924088', dig: '0', email: '00001239240880sp@al.educacao.sp.gov.br' },
+            { nome: 'SARAH CAVALCANTE CANDIDO DA SILVA', ra: '116764243', dig: '0', email: '00001167642430sp@al.educacao.sp.gov.br' },
+            { nome: 'SOFIA SOARES DE OLIVEIRA', ra: '122965630', dig: '3', email: '00001229656303SP@al.educacao.sp.gov.br' },
+            { nome: 'VINICÍUS ARTHUR ALVES DA SILVA', ra: '121479898', dig: '6', email: '00001214798986sp@al.educacao.sp.gov.br' },
+            { nome: 'WALLISON LEONARDO DE JESUS LESSA', ra: '115891648', dig: '6', email: '00001158916486sp@al.educacao.sp.gov.br' },
+            { nome: 'EDUARDO ANTONIO LAMBERT GONÇALVES', ra: '125489065', dig: '8', email: '00001254890658sp@al.educacao.sp.gov.br' },
+            { nome: 'FERNANDA MEDEIROS FANTINI', ra: '116503850', dig: 'X', email: '0000116503850XSP@al.educacao.sp.gov.br' },
+            { nome: 'JOAO PIETRO ROCHA OLIVEIRA', ra: '124983876', dig: '9', email: '00001249838769sp@al.educacao.sp.gov.br' },
+            { nome: 'JOÃO VICTOR FERNANDES MORAES', ra: '114454947', dig: '4', email: '00001144549474SP@al.educacao.sp.gov.br' },
+            { nome: 'LEONARDO FURINI FERNANDES JUNIOR', ra: '115885233', dig: '2', email: '00001158852332SP@al.educacao.sp.gov.br' },
+            { nome: 'ALESSANDRA SALGADO DA SILVA', ra: '116498435', dig: '4', email: '00001164984354SP@al.educacao.sp.gov.br' },
+            { nome: 'ROBERT LUCAS MARTINS FERREIRA', ra: '116520583', dig: 'X', email: '0000116520583XSP@al.educacao.sp.gov.br' },
+            { nome: 'ALICIA SALGADO DA SILVA', ra: '116498756', dig: '2', email: '00001164987562SP@al.educacao.sp.gov.br' },
+            { nome: 'ALICE CANALLE MAGALHÃES', ra: '121482871', dig: '1', email: '00001214828711SP@al.educacao.sp.gov.br' }
+        ],
+        "6°Ano C": [
+            { nome: 'AGATHA RODRIGUES MIRANDA', ra: '121488538', dig: 'X', email: '0000121488538xsp@al.educacao.sp.gov.br' },
+            { nome: 'ANA LETÍCIA MARTINS DA SILVA', ra: '121494077', dig: '8', email: '00001214940778SP@al.educacao.sp.gov.br' },
+            { nome: 'ARTHUR DEIVID DA SILVA FARIAS', ra: '121487001', dig: '6', email: '00001214870016sp@al.educacao.sp.gov.br' },
+            { nome: 'CLARA JAZMIN URDAPILLETA GONZALEZ', ra: '122151652', dig: '8', email: '00001221516528SP@al.educacao.sp.gov.br' },
+            { nome: 'EMILY COSTA PEREIRA', ra: '115507107', dig: '4', email: '00001155071074sp@al.educacao.sp.gov.br' },
+            { nome: 'FELIPE BARROS DE FREITAS', ra: '115879405', dig: '8', email: '00001158794058sp@al.educacao.sp.gov.br' },
+            { nome: 'HELOISA NEVES DA SILVA', ra: '115078739', dig: '9', email: '00001150787399SP@al.educacao.sp.gov.br' },
+            { nome: 'ISABELA SEVERA RAULINO', ra: '115881194', dig: '9', email: '00001158811949sp@al.educacao.sp.gov.br' },
+            { nome: 'JOAO VITOR BARBOSA PONTES', ra: '115882734', dig: '9', email: '00001158827349SP@al.educacao.sp.gov.br' },
+            { nome: 'LAURAH APARECIDA CANDIDO DE OLIVEIRA', ra: '121621617', dig: '4', email: '00001216216174SP@al.educacao.sp.gov.br' },
+            { nome: 'MATHEUS DUARTE DA SILVA', ra: '121487460', dig: '5', email: '00001214874605SP@al.educacao.sp.gov.br' },
+            { nome: 'ROSA MARIA OLIVEIRA ALMEIDA', ra: '121493517', dig: '5', email: '00001214935175SP@al.educacao.sp.gov.br' },
+            { nome: 'SARAH LIVIA NUNES NASCIMENTO', ra: '122976724', dig: '1', email: '00001229767241sp@al.educacao.sp.gov.br' },
+            { nome: 'TALITA VITORIA VIEIRA NUNES', ra: '122357909', dig: '8', email: '00001223579098sp@al.educacao.sp.gov.br' },
+            { nome: 'VICTOR EDUARDO DOS SANTOS', ra: '115891304', dig: '7', email: '00001158913047sp@al.educacao.sp.gov.br' },
+            { nome: 'VITOR HUGO BRAZ GOMES', ra: '116468352', dig: '4', email: '00001164683524SP@al.educacao.sp.gov.br' },
+            { nome: 'LORENNA ANDRADE DE OLIVEIRA', ra: '116528484', dig: '4', email: '00001165284844SP@al.educacao.sp.gov.br' },
+            { nome: 'MARIA EDUARDA ARAUJO GARRIDO', ra: '125480581', dig: '3', email: '00001254805813sp@al.educacao.sp.gov.br' },
+            { nome: 'RAISSA MATHIAS ANDRADE', ra: '121477489', dig: '1', email: '00001214774891sp@al.educacao.sp.gov.br' },
+            { nome: 'UELITON VIEIRA DA SILVA', ra: '121490087', dig: '2', email: '' },
+            { nome: 'VALENTINA DOS SANTOS CORREA', ra: '115844738', dig: '3', email: '00001158447383SP@al.educacao.sp.gov.br' },
+            { nome: 'MARIA VITORIA ALMEIDA SANTOS', ra: '122357970', dig: '0', email: '' },
+            { nome: 'CATARYNA DOS SANTOS', ra: '121484716', dig: 'X', email: '0000121484716xsp@al.educacao.sp.gov.br' },
+            { nome: 'ANA CLARA CORREA PINTO', ra: '116499044', dig: '5', email: '00001164990445sp@al.educacao.sp.gov.br' },
+            { nome: 'GUSTAVO HENRIQUE SANTOS MALAQUIAS', ra: '115880504', dig: '4', email: '00001158805044sp@al.educacao.sp.gov.br' },
+            { nome: 'SOFFIA NICOLY ALVES FIDELES', ra: '115890524', dig: '5', email: '00001158905245SP@al.educacao.sp.gov.br' },
+            { nome: 'DAYLLA CRISTINE RODRIGUES DOS SANTOS VIEIRA', ra: '115985440', dig: '3', email: '00001159854403sp@al.educacao.sp.gov.br' }
+        ]
+    };
+
+    // ================================================================
+    // QUESTÕES (10 questões: 7 múltipla escolha + 3 dissertativas)
+    // ================================================================
+    const questoes = [
+        {
+            tipo: "multipla",
+            aula: 1,
+            enunciado: 'A teoria celular é um dos pilares da Biologia. Segundo essa teoria, todos os seres vivos são formados por células. Analise a imagem e identifique a afirmativa que NÃO está de acordo com a teoria celular.',
+            imagem: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1LgmEHmLgH90sboi3aGSxoWnv_yNEtM6uHjfd6jq_F3-9cU4_2KDdriKoXgNPP57pjjHZHu6T4zldsSFqm131U0b_BPLG4hyJWOinmCjLMcqgspYUlZNDnE-n4cjiqM8rFqncHaquSUb-wfDuv8i6wWz42e1bDbupGuPiKRJgkaFxbc5CiegNPHLbpAbC/s5000/ChatGPT%20Image%2024%20de%20ago.%20de%202026,%2005_13_41.png',
+            alternativas: [
+                'A célula é a unidade estrutural dos seres vivos.',
+                'Toda célula se origina de outra célula preexistente.',
+                'Os vírus são considerados seres vivos, pois possuem células.',
+                'As células podem ser unicelulares ou pluricelulares.'
+            ],
+            correta: 2
+        },
+        {
+            tipo: "multipla",
+            aula: 2,
+            enunciado: 'O desenvolvimento do microscópio foi fundamental para os avanços no estudo das células. Qual das alternativas abaixo descreve corretamente uma contribuição desse instrumento para a Ciência?',
+            imagem: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCqekxI7Jxjx256FYjfF8eMGarqW06b539gf7L-UmuyaWm5a4wIHLou6sWhfeQv6HTGhqYuK2JHfZrGfZVjXfzrgZdaBMWZHcfu4vRLoHrXsjDdP9XD7ngUiGUUOCuJSa1f3CjzvWri79TwVdpRzkF-0QuvaF1mkrYlV9GM_UdcqxTxe48l-rihKzN5T0k/s1536/ChatGPT%20Image%2024%20de%20ago.%20de%202026,%2018_04_03.pn',
+            alternativas: [
+                'Permitiu observar a estrutura dos átomos.',
+                'Possibilitou a visualização de células e microrganismos.',
+                'Foi usado para medir a temperatura das estrelas.',
+                'Auxiliou na descoberta da gravidade.'
+            ],
+            correta: 1
+        },
+        {
+            tipo: "multipla",
+            aula: 3,
+            enunciado: 'Toda célula possui três componentes básicos: membrana, citoplasma e material genético. Analise a imagem e indique qual estrutura é responsável por controlar as atividades celulares e armazenar as informações genéticas.',
+            imagem: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZL1XfTKlVzJk9TvhwhSQUzeAU8kpH83kx4vBac9CD64AcnH0xRCEiCuCkwg21Gw_DXaKSdUdjtMkJE3CzVVnOVJb9cocDhw5MBWhpwG_1KxfZIfGCOAh9p2dE6SF-7VhhrUgSV-WK4ifvxbmpCpiEOTZQ0_dU0r23x0HgppXLPK9wSRGo3R_wYPc7IbYy/s1536/ChatGPT%20Image%2024%20de%20ago.%20de%202026,%2018_08_05.png',
+            alternativas: [
+                'Membrana plasmática',
+                'Citoplasma',
+                'Núcleo',
+                'Mitocôndria'
+            ],
+            correta: 2
+        },
+        {
+            tipo: "multipla",
+            aula: 4,
+            enunciado: 'As células podem ser classificadas em procariontes e eucariontes. A principal diferença entre elas é a presença de núcleo organizado. Qual dos organismos a seguir é composto por células procariontes?',
+            imagem: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhILjvloVU9qRm6NyhQtFqlUFvNmh1LrVYUafgsKEy8rvQz4vlMxB08-VeSwGS3QKOHfbfeNdKpG0JaO98AcvfZ0Zf7TQ0PcPQLEnwtxHIYWQDKPamZBefe-lr-Wfa_osJM7I91hTcOg41CK_fE_7f4jCDA7DfsADzExDO9Mtd_xWSCdzNOY_v8fOgVa_Ku/s1402/1fc91cea-b937-4861-8aa8-6f75a451cdf1.png',
+            alternativas: [
+                'Cogumelo (fungo)',
+                'Bactéria',
+                'Planta',
+                'Animal'
+            ],
+            correta: 1
+        },
+        {
+            tipo: "multipla",
+            aula: 5,
+            enunciado: 'A célula animal possui organelas que desempenham funções específicas. Qual organela é responsável pela produção de energia (respiração celular) na célula animal?',
+            imagem: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhydHf0GsH6ahmrGfRqgUBUvNALE4hLtgYrnBlYCJi_cBy2egT9IMJWoy_wFFwC2UHNVsN4wnIVqRQwh_4k2TA0hMARyN5B0JLvEZzxeGT3_Tgrd70mPo8Hbh_Qn1ZkXIQieeqad9HxwBnaPY0JDw8RRcUk0Tos2oIsdjkW5DF8-2yx_HwG5-sCrq3jgNrZ/s1402/3ae729bc-f0fd-4845-a311-9fdcf4c35aca.png',
+            alternativas: [
+                'Retículo endoplasmático',
+                'Lisossomo',
+                'Mitocôndria',
+                'Complexo de Golgi'
+            ],
+            correta: 2
+        },
+        {
+            tipo: "multipla",
+            aula: 6,
+            enunciado: 'A célula vegetal possui estruturas exclusivas que a diferenciam da célula animal. Observe a imagem e identifique qual estrutura é responsável pela realização da fotossíntese.',
+            imagem: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh_RPSvelzyJOF9fcrq1Er-NG_XoUY_vZ0H4TGRn5C7nTXOLQ7YKQIQv4FW7SP3CI2AKcVViPj7FbNZfXVV6UL8xOMl5I7AIbbrq9FRT1gAM4dxlV9wN8aANXq_nk31F0RU0Y1XAIk9VUmovRPClKcryn9Yoyz98fdwn8Kp7PzqtxK8kf7A2YGs1Qm0EmoU/s1536/6a0579b8-c05d-48dd-b0b3-2a3dd69800e2.png',
+            alternativas: [
+                'Vacúolo',
+                'Cloroplasto',
+                'Parede celular',
+                'Mitocôndria'
+            ],
+            correta: 1
+        },
+        {
+            tipo: "dissertativa",
+            aula: 7,
+            enunciado: 'Após construir um modelo tridimensional de uma célula vegetal, explique a função de cada uma das seguintes estruturas: membrana plasmática, cloroplasto e núcleo. Justifique a importância de cada uma para o funcionamento da célula.',
+            imagem: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhJXry8ldAsom23H17xX9JV3VSrOhJq7M5M3stHugoPIPBuluS5N83C9fYzk2MHKeqXIJOVHoKhwqlDO7dwGq25YSGwv98OIoFXOTnvEAuyfU5tvabKpniCHNDxH_IjpqRvUBzLu1OojR3ROYRJga9FK2UvbPwMrhO59NrQpbC_rDO3JzDQTfbQ8egG1ug/s1536/24%20de%20ago.%20de%202026,%2020_12_24.png'
+        },
+        {
+            tipo: "multipla",
+            aula: 9,
+            enunciado: 'As bactérias são organismos procariontes que podem apresentar diferentes formatos. Qual das alternativas abaixo descreve corretamente uma característica das bactérias?',
+            imagem: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgq5AGwecml38r7dAxj6ZCpTX-7TwzcgrNdczSrRkDQ6hedtvTzbUu31hrvMZpOE-hag0IPKbwPBcNPAfQyYMpHj-D8yr7A-hNqHHpmIx75WwOcmjNT-D0I1dT8AVcQegmCiHcq12NsKkaNOk7avlkOShAwM2bC9QXMcLCNk9wDYbZYBs5t7y8SSyHscGTA/s485/Fungos%201.PNG',
+            alternativas: [
+                'Possuem núcleo organizado.',
+                'São organismos eucariontes.',
+                'Podem ser encontradas em diversos ambientes, incluindo o corpo humano.',
+                'Realizam fotossíntese obrigatoriamente.'
+            ],
+            correta: 2
+        },
+        {
+            tipo: "dissertativa",
+            aula: 10,
+            enunciado: 'Os fungos são organismos eucariontes, unicelulares ou pluricelulares. Descreva duas funções ecológicas importantes dos fungos no ambiente e como eles se relacionam com outros seres vivos.',
+            imagem: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1eqehpBcmosSimXaSfTgNB0VgpAijoiqThnCgGKhbX9XroVqqXp1SPXjmwb8M_8d3EEYBAcdHhGjq1TRxq5rZVF-RdhcO-P0jcxbAkNaRVmT8GaPPBZ6jE_YXy378kBH-xUc4Py8d7Rm8OrysPHIlA2OQgzdUHB2hjZhLYpKMfwGipiFIilEXBXNl2vtc/s1402/ChatGPT%20Image%2024%20de%20ago.%20de%202026,%2020_38_46.png'
+        },
+        {
+            tipo: "dissertativa",
+            aula: 11,
+            enunciado: 'Protozoários são organismos unicelulares eucariontes. Cite dois exemplos de doenças causadas por protozoários e explique como elas podem ser prevenidas.',
+            imagem: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBCh9NogwH2CEnTrZQ0RyXYpGoKA0fPKTRrdm5Om3rTYoE_H6aHrtKv0GAKlUcwRxz75NnnemklxvR7UJxgYUWfZCHkNxBKKB-t_rgnZbjGSrJX1En6yaDJtCPxDlzLeUeu1Qxv3xdhmx1rqMzEB24sf8gtn1cUnmBjQQN2WkBpG8x9_IS524y2V-flArn/s1536/ChatGPT%20Image%2024%20de%20ago.%20de%202026,%2023_35_16.png'
+        }
+    ];
+
+    // ================================================================
+    // RENDERIZA QUESTÕES
+    // ================================================================
+    function renderQuestoes() {
+        const container = document.getElementById('questoesContainer');
+        container.innerHTML = '';
+        questoes.forEach((q, idx) => {
+            const div = document.createElement('div');
+            div.className = 'question';
+            let html = `<div class="badge-aula">Aula ${q.aula}</div>`;
+            html += `<p><strong>Questão ${idx+1}</strong> – ${q.tipo === 'multipla' ? 'Múltipla escolha' : 'Dissertativa'}</p>`;
+            html += `<p>${q.enunciado}</p>`;
+            if (q.imagem) {
+                html += `<img src="${q.imagem}" alt="Imagem ilustrativa da questão" loading="lazy" onclick="ampliarImagem('${q.imagem}')">`;
+                html += `<div class="img-hint">🔍 Clique na imagem para ampliar</div>`;
+            }
+            if (q.tipo === 'multipla') {
+                html += `<div class="alternativas" id="alternativas_${idx}">`;
+                q.alternativas.forEach((alt, i) => {
+                    html += `
+                        <label for="q${idx}_${i}" onclick="selecionarAlternativa(${idx}, ${i})">
+                            <input type="radio" name="q${idx}" id="q${idx}_${i}" value="${i}">
+                            <span>${String.fromCharCode(65 + i)} - ${alt}</span>
+                        </label>
+                    `;
+                });
+                html += `</div>`;
+            } else {
+                html += `<div class="dissertativa"><textarea id="dissertativa_${idx}" placeholder="Escreva sua resposta aqui..."></textarea></div>`;
+            }
+            div.innerHTML = html;
+            container.appendChild(div);
+        });
+    }
+
+    // ================================================================
+    // LIGHTBOX - AMPLIAR / FECHAR IMAGEM
+    // ================================================================
+    function ampliarImagem(src) {
+        const overlay = document.getElementById('lightboxOverlay');
+        const img = document.getElementById('lightboxImg');
+        img.src = src;
+        overlay.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function fecharImagem(event) {
+        // Evita fechar quando clica na própria imagem ampliada (exceto pelo botão X, que também deve fechar)
+        if (event && event.target.id === 'lightboxImg') return;
+        const overlay = document.getElementById('lightboxOverlay');
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
+    }
+
+    // Fecha o lightbox com a tecla ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            fecharImagem();
+        }
+    });
+
+    // ================================================================
+    // FUNÇÃO PARA SELECIONAR ALTERNATIVA
+    // ================================================================
+    function selecionarAlternativa(questaoIndex, alternativaIndex) {
+        const container = document.getElementById(`alternativas_${questaoIndex}`);
+        if (!container) return;
+
+        const labels = container.querySelectorAll('label');
+        labels.forEach(label => {
+            label.classList.remove('selecionada');
+        });
+
+        const labelClicada = labels[alternativaIndex];
+        if (labelClicada) {
+            labelClicada.classList.add('selecionada');
+            const radio = labelClicada.querySelector('input[type="radio"]');
+            if (radio) {
+                radio.checked = true;
+            }
+        }
+    }
+
+    // ================================================================
+    // FUNÇÕES DE CARREGAMENTO DE ALUNOS
+    // ================================================================
+    function carregarNomes() {
+        const turma = document.getElementById('selectTurma').value;
+        const selectNome = document.getElementById('selectNome');
+        selectNome.innerHTML = '<option value="">Selecione um aluno</option>';
+        if (turma && alunosPorTurma[turma]) {
+            alunosPorTurma[turma].forEach(aluno => {
+                const opt = document.createElement('option');
+                opt.value = aluno.nome;
+                opt.textContent = aluno.nome;
+                selectNome.appendChild(opt);
+            });
+        }
+        document.getElementById('spanRA').textContent = '-';
+        document.getElementById('spanEmail').textContent = '-';
+    }
+
+    function carregarDadosAluno() {
+        const turma = document.getElementById('selectTurma').value;
+        const nome = document.getElementById('selectNome').value;
+        if (turma && nome) {
+            const aluno = alunosPorTurma[turma].find(a => a.nome === nome);
+            if (aluno) {
+                document.getElementById('spanRA').textContent = aluno.ra + (aluno.dig ? `-${aluno.dig}` : '');
+                document.getElementById('spanEmail').textContent = aluno.email;
+                return;
+            }
+        }
+        document.getElementById('spanRA').textContent = '-';
+        document.getElementById('spanEmail').textContent = '-';
+    }
+
+    // ================================================================
+    // ENVIO PARA PLANILHA - VERSÃO CORRIGIDA COM LOGGING
+    // ================================================================
+    function enviarRespostas() {
+        const turma = document.getElementById('selectTurma').value;
+        const nome = document.getElementById('selectNome').value;
+        const ra = document.getElementById('spanRA').textContent;
+        const email = document.getElementById('spanEmail').textContent;
+
+        if (!turma || !nome) {
+            alert('Por favor, selecione sua turma e nome antes de enviar.');
+            return;
+        }
+
+        // Coleta as respostas com validação
+        const respostas = [];
+        questoes.forEach((q, idx) => {
+            if (q.tipo === 'multipla') {
+                const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+                const resposta = selected ? selected.value : '';
+                respostas.push(resposta);
+                console.log(`Q${idx+1} (múltipla): ${resposta}`);
+            } else {
+                const textarea = document.getElementById(`dissertativa_${idx}`);
+                const resposta = textarea ? textarea.value.trim() : '';
+                respostas.push(resposta);
+                console.log(`Q${idx+1} (dissertativa): ${resposta.substring(0, 50)}...`);
+            }
+        });
+
+        // Prepara o payload
+        const payload = {
+            turma: turma,
+            nome: nome,
+            ra: ra,
+            email: email,
+            respostas: respostas,
+            timestamp: new Date().toISOString()
+        };
+
+        console.log('Payload a enviar:', JSON.stringify(payload, null, 2));
+
+        const btnEnviar = document.getElementById('btnEnviar');
+        const feedback = document.getElementById('feedback');
+
+        btnEnviar.disabled = true;
+        feedback.textContent = '⏳ Enviando respostas...';
+        feedback.className = 'feedback visible carregando';
+
+        // ⚠️ IMPORTANTE: SUBSTITUA PELA URL DO SEU APPS SCRIPT (após publicar como Web App)
+        const scriptURL = 'COLE_AQUI_A_URL_DO_SEU_APPS_SCRIPT';
+
+        fetch(scriptURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            console.log('Status HTTP:', response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.text(); // Tenta ler como texto primeiro
+        })
+        .then(text => {
+            console.log('Resposta do servidor (texto):', text);
+            // Tenta fazer parse como JSON
+            try {
+                const data = JSON.parse(text);
+                if (data.success) {
+                    feedback.textContent = '✅ Respostas enviadas com sucesso!';
+                    feedback.className = 'feedback visible sucesso';
+                    btnEnviar.disabled = true;
+                    btnEnviar.textContent = '✅ Respostas enviadas';
+                } else {
+                    throw new Error(data.error || 'Erro desconhecido no servidor');
+                }
+            } catch (parseError) {
+                console.error('Erro ao fazer parse da resposta:', parseError);
+                feedback.textContent = '✅ Respostas enviadas! (Resposta: ' + text.substring(0, 50) + ')';
+                feedback.className = 'feedback visible sucesso';
+                btnEnviar.disabled = true;
+                btnEnviar.textContent = '✅ Respostas enviadas';
+            }
+        })
+        .catch(error => {
+            console.error('Erro detalhado:', error);
+            console.error('Stack:', error.stack);
+            feedback.textContent = '❌ Erro: ' + error.message;
+            feedback.className = 'feedback visible erro';
+            btnEnviar.disabled = false;
+        });
+    }
+
+    // ================================================================
+    // INICIALIZA
+    // ================================================================
+    renderQuestoes();
+    console.log('Formulário carregado. Total de questões:', questoes.length);
+</script>
+
+</body>
+</html>
