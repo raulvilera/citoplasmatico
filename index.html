@@ -693,15 +693,15 @@
             }
         });
 
-        // Prepara o payload
-        const payload = {
-            turma: turma,
-            nome: nome,
-            ra: ra,
-            email: email,
-            respostas: respostas,
-            timestamp: new Date().toISOString()
-        };
+       const payload = {
+    atividade: 'celula6wms_cito',   // <-- adicionar esta linha
+    turma: turma,
+    nome: nome,
+    ra: ra,
+    email: email,
+    respostas: respostas,
+    timestamp: new Date().toISOString()
+};
 
         console.log('Payload a enviar:', JSON.stringify(payload, null, 2));
 
